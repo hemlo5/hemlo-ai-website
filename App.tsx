@@ -1,31 +1,8 @@
 import React from 'react';
 import { SplineSceneBasic } from './components/SplineSceneBasic';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './components/ui/card';
-import { CursorSpotlight } from './components/ui/cursor-spotlight';
-import { Box, Layers, Zap } from 'lucide-react';
-
-const FeatureCard = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => (
-  <div className="relative group">
-    {/* Use the CursorSpotlight here for a nice effect on hover */}
-    <div className="absolute inset-0 rounded-lg overflow-hidden">
-        <CursorSpotlight className="from-blue-500/20 via-purple-500/20 to-pink-500/20" size={300} />
-    </div>
-    
-    <Card className="relative bg-zinc-900/50 border-zinc-800 hover:border-zinc-700 transition-colors">
-      <CardHeader>
-        <div className="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center mb-4 text-white">
-          <Icon size={24} />
-        </div>
-        <CardTitle className="text-white">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription className="text-zinc-400">
-          {description}
-        </CardDescription>
-      </CardContent>
-    </Card>
-  </div>
-);
+import { EmailClientDemo } from './components/EmailClientDemo';
+import { MovieDownloadDemo } from './components/MovieDownloadDemo';
+import { GooeyText } from './components/ui/gooey-text-morphing';
 
 export default function App() {
   return (
@@ -55,29 +32,35 @@ export default function App() {
           <SplineSceneBasic />
         </section>
 
-        {/* Features Section */}
-        <section>
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">Powerful Features</h2>
-            <p className="text-zinc-400">Everything you need to create stunning 3D interfaces</p>
+        {/* Automation Section */}
+        <section className="flex flex-col gap-12">
+          {/* Centered Title with Gooey Animation */}
+          <div className="text-center w-full mx-auto flex flex-col items-center justify-center gap-2 mb-8">
+            <h2 className="text-4xl md:text-6xl font-bold leading-tight text-white/50">
+              Just a prompt for
+            </h2>
+            <div className="h-28 w-full relative">
+                 <GooeyText 
+                    texts={['Meetings', 'Downloads', 'Flights', 'Every digital task']} 
+                    className="h-full w-full"
+                    textClassName="text-4xl md:text-6xl font-bold leading-tight text-white"
+                 />
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <FeatureCard 
-              icon={Box}
-              title="3D Integration"
-              description="Seamlessly integrate Spline scenes directly into your React application with zero friction."
-            />
-            <FeatureCard 
-              icon={Zap}
-              title="High Performance"
-              description="Optimized loading states and lazy loading ensure your app stays fast and responsive."
-            />
-            <FeatureCard 
-              icon={Layers}
-              title="Interactive"
-              description="Create rich, interactive experiences that respond to user input and mouse movement."
-            />
+          {/* Feature Grid: Side-by-Side Animations */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+            {/* Left Column: Email Automation */}
+            <div className="relative group">
+               <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-700"></div>
+               <EmailClientDemo />
+            </div>
+            
+            {/* Right Column: Movie Download Automation */}
+            <div className="relative group">
+               <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-700"></div>
+               <MovieDownloadDemo />
+            </div>
           </div>
         </section>
 

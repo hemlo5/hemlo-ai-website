@@ -16,7 +16,7 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
     {
       text,
       gradientColors = "linear-gradient(90deg, #000, #fff, #000)",
-      gradientAnimationDuration = 2,
+      gradientAnimationDuration = 1,
       hoverEffect = false,
       className,
       textClassName,
@@ -36,7 +36,6 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
           duration: gradientAnimationDuration,
           repeat: Infinity,
           repeatType: "reverse" as const,
-          ease: "linear"
         },
       },
     };
@@ -44,19 +43,17 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex justify-center items-center py-2", className)}
+        className={cn("flex justify-center items-center py-8", className)}
         {...props}
       >
         <motion.h1
-          className={cn("text-[2.5rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-normal font-extrabold tracking-tight", textClassName)}
+          className={cn("text-[2.5rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-normal", textClassName)}
           style={{
-            backgroundImage: gradientColors,
+            background: gradientColors,
             backgroundSize: "200% auto",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            color: "transparent",
-            textShadow: isHovered ? "0 0 16px rgba(255,255,255,0.4)" : "none",
+            textShadow: isHovered ? "0 0 8px rgba(255,255,255,0.3)" : "none",
           }}
           variants={textVariants}
           initial="initial"

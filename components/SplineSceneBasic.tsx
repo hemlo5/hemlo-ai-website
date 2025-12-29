@@ -16,21 +16,22 @@ export function SplineSceneBasic() {
       
       <div className="flex flex-col md:flex-row h-full">
         {/* Left content */}
-        <div className="flex-1 p-8 relative z-10 flex flex-col justify-center">
+        <div className="flex-1 p-8 relative z-10 flex flex-col justify-center items-center text-center">
           
           <AnimatedText 
             text="HEMLO"
-            className="justify-start py-0 mb-2"
-            textClassName="text-6xl md:text-8xl font-black"
-            gradientColors="linear-gradient(90deg, #71717a, #ffffff, #71717a)"
+            className="justify-center py-0 mb-2"
+            textClassName="text-[100px] sm:text-[180px] font-black leading-none tracking-tighter"
+            // Using a sharper gradient: Dark -> Bright White -> Dark for the shiny effect
+            gradientColors="linear-gradient(90deg, #444444, #ffffff, #444444)"
             gradientAnimationDuration={3}
             hoverEffect={true}
           />
 
-          <p className="mt-2 text-neutral-300 max-w-lg text-lg">
-            your personal ai butler
+          <p className="mt-2 text-white max-w-lg text-lg text-center font-medium">
+            Your every digital task is now done by Hemlo
           </p>
-          <div className="mt-8 flex gap-4">
+          <div className="mt-8 flex gap-4 justify-center">
             <button className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-neutral-200 transition">
               Get Started
             </button>
