@@ -25,18 +25,18 @@ export function CodingVibeDemo() {
   }, []);
 
   return (
-    <Card className="w-full h-[400px] md:h-[500px] bg-zinc-950 border-zinc-800 overflow-hidden relative group">
-       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-950/20 via-zinc-950 to-zinc-950 opacity-50" />
+    <Card className="w-full h-[400px] md:h-[500px] bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 overflow-hidden relative group transition-colors duration-300">
+       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-100 via-white to-white dark:from-blue-950/20 dark:via-zinc-950 dark:to-zinc-950 opacity-50" />
        
        <div className="relative z-0 h-full w-full flex items-center justify-center pb-24 md:pb-32 px-4">
-          <div className="w-full max-w-[340px] bg-black/80 border border-zinc-800 rounded-lg overflow-hidden font-mono text-xs shadow-2xl">
-             <div className="h-8 bg-zinc-900 border-b border-zinc-800 flex items-center px-3 gap-2">
+          <div className="w-full max-w-[340px] bg-zinc-900 dark:bg-black/80 border border-zinc-700 dark:border-zinc-800 rounded-lg overflow-hidden font-mono text-xs shadow-2xl">
+             <div className="h-8 bg-zinc-800 dark:bg-zinc-900 border-b border-zinc-700 dark:border-zinc-800 flex items-center px-3 gap-2">
                  <div className="flex gap-1.5">
                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50" />
                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50" />
                  </div>
-                 <div className="ml-2 text-zinc-500">vibe-coder — zsh</div>
+                 <div className="ml-2 text-zinc-400 dark:text-zinc-500">vibe-coder — zsh</div>
              </div>
              <div className="p-4 h-[240px] overflow-hidden relative">
                  <AnimatePresence mode="wait">
@@ -94,7 +94,7 @@ export function CryptoHero() {
                              </div>
                              <motion.div 
                                 initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                                className="mt-4 bg-zinc-900 border border-zinc-700 rounded p-3"
+                                className="mt-4 bg-zinc-800 dark:bg-zinc-900 border border-zinc-700 rounded p-3"
                              >
                                  <div className="flex items-center justify-between text-white mb-2">
                                      <span className="font-bold">Preview</span>
@@ -109,11 +109,11 @@ export function CryptoHero() {
           </div>
        </div>
 
-       <div className="absolute bottom-0 left-0 right-0 z-20 h-1/2 bg-gradient-to-t from-black via-black/80 to-transparent flex flex-col justify-end p-8 md:p-12 pointer-events-none">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight tracking-tight drop-shadow-lg">
+       <div className="absolute bottom-0 left-0 right-0 z-20 h-1/2 bg-gradient-to-t from-zinc-50 via-zinc-50/80 to-transparent dark:from-black dark:via-black/80 dark:to-transparent flex flex-col justify-end p-8 md:p-12 pointer-events-none">
+            <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-2 leading-tight tracking-tight drop-shadow-sm dark:drop-shadow-lg">
                 It vibe codes for you
             </h3>
-            <p className="text-zinc-300 text-base md:text-lg max-w-lg font-medium drop-shadow-md">
+            <p className="text-zinc-600 dark:text-zinc-300 text-base md:text-lg max-w-lg font-medium drop-shadow-sm dark:drop-shadow-md">
                 Now even prompts are given by AI to other AI.
             </p>
         </div>

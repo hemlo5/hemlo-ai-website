@@ -28,14 +28,15 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
 
     const textVariants: Variants = {
       initial: {
-        backgroundPosition: "0 0",
+        backgroundPosition: "0% 50%",
       },
       animate: {
-        backgroundPosition: "100% 0",
+        backgroundPosition: "200% 50%",
         transition: {
           duration: gradientAnimationDuration,
           repeat: Infinity,
-          repeatType: "reverse" as const,
+          repeatType: "loop",
+          ease: "linear",
         },
       },
     };

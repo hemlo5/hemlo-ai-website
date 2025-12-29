@@ -8,10 +8,9 @@ import { AnimatedText } from "./ui/animated-shiny-text";
  
 export function SplineSceneBasic() {
   return (
-    <Card className="w-full h-[600px] bg-black/[0.96] relative overflow-hidden border-zinc-800">
+    <Card className="w-full h-[600px] bg-white dark:bg-black/[0.96] relative overflow-hidden border-zinc-200 dark:border-zinc-800 shadow-xl dark:shadow-none transition-colors duration-300">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
-        fill="white"
       />
       
       <div className="flex flex-col md:flex-row h-full">
@@ -22,20 +21,20 @@ export function SplineSceneBasic() {
             text="HEMLO"
             className="justify-center py-0 mb-2"
             textClassName="text-[100px] sm:text-[180px] font-black leading-none tracking-tighter"
-            // Using a sharper gradient: Dark -> Bright White -> Dark for the shiny effect
-            gradientColors="linear-gradient(90deg, #444444, #ffffff, #444444)"
-            gradientAnimationDuration={3}
-            hoverEffect={true}
+            // Use CSS variables defined in index.html to adapt to theme
+            gradientColors="linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))"
+            gradientAnimationDuration={2}
+            hoverEffect={false}
           />
 
-          <p className="mt-2 text-white max-w-lg text-lg text-center font-medium">
+          <p className="mt-2 text-zinc-600 dark:text-white max-w-lg text-lg text-center font-medium">
             Your every digital task is now done by Hemlo
           </p>
           <div className="mt-8 flex gap-4 justify-center">
-            <button className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-neutral-200 transition">
+            <button className="px-6 py-3 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-black font-semibold hover:bg-zinc-700 dark:hover:bg-neutral-200 transition">
               Get Started
             </button>
-            <button className="px-6 py-3 rounded-full border border-neutral-700 text-white font-semibold hover:bg-neutral-900 transition">
+            <button className="px-6 py-3 rounded-full border border-zinc-300 dark:border-neutral-700 text-zinc-900 dark:text-white font-semibold hover:bg-zinc-100 dark:hover:bg-neutral-900 transition">
               View Gallery
             </button>
           </div>
