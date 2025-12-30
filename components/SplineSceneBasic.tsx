@@ -8,7 +8,7 @@ import { AnimatedText } from "./ui/animated-shiny-text";
  
 export function SplineSceneBasic() {
   return (
-    <Card className="w-full h-[600px] bg-white dark:bg-black/[0.96] relative overflow-hidden border-zinc-200 dark:border-zinc-800 shadow-xl dark:shadow-none transition-colors duration-300">
+    <Card className="w-full h-[800px] md:h-[600px] bg-white dark:bg-black/[0.96] relative overflow-hidden border-zinc-200 dark:border-zinc-800 shadow-xl dark:shadow-none transition-colors duration-300">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
       />
@@ -40,8 +40,8 @@ export function SplineSceneBasic() {
           </div>
         </div>
 
-        {/* Right content */}
-        <div className="flex-1 relative min-h-[300px] md:min-h-full">
+        {/* Right content - Robot restored on all devices */}
+        <div className="flex-1 relative min-h-[400px] md:min-h-full">
           <SplineScene 
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="w-full h-full"

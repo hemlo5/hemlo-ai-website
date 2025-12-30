@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card } from './ui/card';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Send, Check, Sparkles, Paperclip } from 'lucide-react';
 
 const TypingText = ({ text }: { text: string }) => {
@@ -25,32 +25,42 @@ const TypingText = ({ text }: { text: string }) => {
 
 export function EmailClientDemo() {
   const [step, setStep] = useState(0); // 0: idle, 1: typing, 2: sending, 3: success
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef);
+  const isInViewRef = useRef(false);
+
+  useEffect(() => { isInViewRef.current = isInView; }, [isInView]);
 
   useEffect(() => {
     let mounted = true;
     const runAnimationLoop = async () => {
       while (mounted) {
+        if (!isInViewRef.current) {
+          await new Promise(r => setTimeout(r, 1000));
+          continue;
+        }
+
         // Step 1: Start Typing
         setStep(1);
-        await new Promise(r => setTimeout(r, 3000)); // Wait for typing to finish
+        await new Promise(r => setTimeout(r, 3000)); 
 
         if (!mounted) return;
 
         // Step 2: Send
         setStep(2);
-        await new Promise(r => setTimeout(r, 800)); // Wait for exit animation
+        await new Promise(r => setTimeout(r, 800));
 
         if (!mounted) return;
 
         // Step 3: Success State
         setStep(3);
-        await new Promise(r => setTimeout(r, 1500)); // Show success
+        await new Promise(r => setTimeout(r, 1500));
 
         if (!mounted) return;
         
         // Reset
         setStep(0); 
-        await new Promise(r => setTimeout(r, 500)); // Brief pause before restart
+        await new Promise(r => setTimeout(r, 500));
       }
     };
 
@@ -59,12 +69,12 @@ export function EmailClientDemo() {
   }, []);
 
   return (
-    <Card className="w-full h-[400px] md:h-[500px] bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 overflow-hidden relative group transition-colors duration-300">
+    <Card ref={containerRef} className="w-full h-[400px] md:h-[500px] bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 overflow-hidden relative group transition-colors duration-300">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-100 via-white to-white dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-950 opacity-50" />
         
-        {/* Animation Container - Centered and pushed up slightly to avoid text overlap */}
-        <div className="relative z-0 h-full w-full flex items-center justify-center pb-24 md:pb-32 px-4">
+        {/* Animation Container */}
+        <div className="relative z-0 h-full w-full flex items-center justify-center pb-24 md:pb-32 px-4 will-change-transform">
              <AnimatePresence mode="wait">
                  {(step === 0 || step === 1) && (
                      <motion.div 
@@ -120,7 +130,6 @@ export function EmailClientDemo() {
                         transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
                         className="w-full max-w-[340px] bg-zinc-50/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden absolute"
                      >
-                        {/* Static visual of the card for smooth exit transition */}
                         <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 flex items-center gap-3 bg-zinc-50/50 dark:bg-zinc-900/50">
                             <div className="w-8 h-8 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xs font-bold border border-indigo-500/20 dark:border-indigo-500/30">AI</div>
                             <div className="flex-1 min-w-0">

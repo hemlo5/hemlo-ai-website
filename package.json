@@ -1,5 +1,5 @@
 {
-  "name": "spline-3d-landing-page",
+  "name": "hemlo-web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,7 +15,8 @@
     "tailwind-merge": "^3.4.0",
     "clsx": "^2.1.1",
     "@splinetool/react-spline": "^4.1.0",
-    "framer-motion": "^12.23.26"
+    "framer-motion": "^12.23.26",
+    "three": "0.160.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card } from './ui/card';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Terminal, Cpu, Zap, Code2 } from 'lucide-react';
 
 export function CodingVibeDemo() {
   const [step, setStep] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef);
+  const isInViewRef = useRef(false);
+
+  useEffect(() => { isInViewRef.current = isInView; }, [isInView]);
 
   useEffect(() => {
     let mounted = true;
     const loop = async () => {
       while (mounted) {
+        if (!isInViewRef.current) {
+            await new Promise(r => setTimeout(r, 1000));
+            continue;
+        }
+
         setStep(0); // Prompt
         await new Promise(r => setTimeout(r, 2000));
         if (!mounted) return;
@@ -25,10 +35,10 @@ export function CodingVibeDemo() {
   }, []);
 
   return (
-    <Card className="w-full h-[400px] md:h-[500px] bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 overflow-hidden relative group transition-colors duration-300">
+    <Card ref={containerRef} className="w-full h-[400px] md:h-[500px] bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 overflow-hidden relative group transition-colors duration-300">
        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-100 via-white to-white dark:from-blue-950/20 dark:via-zinc-950 dark:to-zinc-950 opacity-50" />
        
-       <div className="relative z-0 h-full w-full flex items-center justify-center pb-24 md:pb-32 px-4">
+       <div className="relative z-0 h-full w-full flex items-center justify-center pb-24 md:pb-32 px-4 will-change-transform">
           <div className="w-full max-w-[340px] bg-zinc-900 dark:bg-black/80 border border-zinc-700 dark:border-zinc-800 rounded-lg overflow-hidden font-mono text-xs shadow-2xl">
              <div className="h-8 bg-zinc-800 dark:bg-zinc-900 border-b border-zinc-700 dark:border-zinc-800 flex items-center px-3 gap-2">
                  <div className="flex gap-1.5">

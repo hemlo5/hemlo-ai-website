@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card } from './ui/card';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Download, Play, Check, Film, Wifi } from 'lucide-react';
 
 export function MovieDownloadDemo() {
   const [step, setStep] = useState(0); // 0: idle, 1: downloading, 2: complete
   const [progress, setProgress] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef);
+  const isInViewRef = useRef(false);
+
+  useEffect(() => { isInViewRef.current = isInView; }, [isInView]);
 
   useEffect(() => {
     let mounted = true;
     const runAnimationLoop = async () => {
       while (mounted) {
+        if (!isInViewRef.current) {
+            await new Promise(r => setTimeout(r, 1000));
+            continue;
+        }
+
         // Step 0: Idle
         setStep(0);
         setProgress(0);
@@ -43,12 +53,12 @@ export function MovieDownloadDemo() {
   }, []);
 
   return (
-    <Card className="w-full h-[400px] md:h-[500px] bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 overflow-hidden relative group transition-colors duration-300">
+    <Card ref={containerRef} className="w-full h-[400px] md:h-[500px] bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 overflow-hidden relative group transition-colors duration-300">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-100 via-white to-white dark:from-indigo-950/20 dark:via-zinc-950 dark:to-zinc-950 opacity-50" />
         
         {/* Content Container */}
-        <div className="relative z-0 h-full w-full flex items-center justify-center pb-24 md:pb-32 px-4">
+        <div className="relative z-0 h-full w-full flex items-center justify-center pb-24 md:pb-32 px-4 will-change-transform">
              <div className="w-full max-w-[320px] bg-zinc-50/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]">
                 {/* Movie Poster Area */}
                 <div className="h-40 bg-black relative overflow-hidden group/poster">
