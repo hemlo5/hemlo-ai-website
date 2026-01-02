@@ -25,6 +25,9 @@ export function GooeyText({
   const isInView = useInView(containerRef);
 
   React.useEffect(() => {
+    // Performance optimization: Completely stop loop if not in view
+    if (!isInView) return;
+
     let textIndex = texts.length - 1;
     let time = new Date();
     let morph = 0;
@@ -66,14 +69,8 @@ export function GooeyText({
     };
 
     function animate() {
-      // If out of view, just request next frame but don't compute heavy filters
-      if (!isInView) {
-        animationFrameId = requestAnimationFrame(animate);
-        time = new Date(); // keep time synced so it doesn't jump when appearing
-        return;
-      }
-
       animationFrameId = requestAnimationFrame(animate);
+      
       const newTime = new Date();
       const shouldIncrementIndex = cooldown > 0;
       const dt = (newTime.getTime() - time.getTime()) / 1000;

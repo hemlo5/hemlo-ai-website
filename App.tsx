@@ -127,7 +127,7 @@ export default function App() {
         </section>
 
         {/* Ask it to do anything - Text Section */}
-        <section className="flex flex-col items-center justify-center text-center px-4 md:px-6 pt-12 pb-0">
+        <section className="flex flex-col items-center justify-center text-center px-4 md:px-6 pt-12 pb-24 md:pb-32">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/5 dark:bg-white/10 border border-zinc-900/10 dark:border-white/10 text-zinc-600 dark:text-zinc-200 text-sm mb-4 backdrop-blur-sm">
                 <Sparkles size={16} className="text-yellow-500 dark:text-yellow-400" />
                 <span>Limitless Automation</span>
@@ -143,7 +143,7 @@ export default function App() {
         </section>
 
         {/* Lamp Section - Footer/CTA */}
-        <section className="w-full relative -mt-40 md:-mt-64 pointer-events-none">
+        <section className="w-full relative pointer-events-none">
             <div className="pointer-events-auto">
             <LampContainer className="min-h-[50vh] md:min-h-[75vh]">
                 <motion.div
