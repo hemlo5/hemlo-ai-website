@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { cn } from '../lib/utils';
+import { AnimatedHemloTitle } from './ui/animated-hemlo-title';
 
 interface RegistrationPageProps {
   onBack: () => void;
@@ -14,6 +16,35 @@ export function RegistrationPage({ onBack }: RegistrationPageProps) {
 
   return (
     <div className="min-h-screen flex items-center justify-center overflow-hidden p-4 bg-zinc-50 dark:bg-black relative">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className={cn(
+              `
+            [--white-gradient:repeating-linear-gradient(100deg,var(--zinc-200)_0%,var(--zinc-200)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--zinc-200)_16%)]
+            [--dark-gradient:repeating-linear-gradient(100deg,var(--zinc-800)_0%,var(--zinc-800)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--zinc-800)_16%)]
+            
+            [--aurora:repeating-linear-gradient(100deg,#d4d4d8_10%,#e4e4e7_15%,#d4d4d8_20%,#a1a1aa_25%,#d4d4d8_30%)]
+            dark:[--aurora:repeating-linear-gradient(100deg,#27272a_10%,#3f3f46_15%,#27272a_20%,#18181b_25%,#27272a_30%)]
+            
+            [background-image:var(--white-gradient),var(--aurora)]
+            dark:[background-image:var(--dark-gradient),var(--aurora)]
+            [background-size:300%,_200%]
+            [background-position:50%_50%,50%_50%]
+            filter blur-[10px] invert dark:invert-0
+            after:content-[""] after:absolute after:inset-0 after:[background-image:var(--white-gradient),var(--aurora)] 
+            after:dark:[background-image:var(--dark-gradient),var(--aurora)]
+            after:[background-size:200%,_100%] 
+            after:animate-aurora after:[background-attachment:fixed] after:mix-blend-difference
+            absolute -inset-[10px] opacity-40 will-change-transform`
+            )}
+             style={{
+                '--zinc-200': '#e4e4e7',
+                '--zinc-800': '#27272a'
+            } as React.CSSProperties}
+          ></div>
+      </div>
+
       {/* Back Button */}
       <button 
         onClick={onBack}
@@ -23,7 +54,12 @@ export function RegistrationPage({ onBack }: RegistrationPageProps) {
         <span className="text-sm font-medium">Back</span>
       </button>
 
-      <div className="w-full relative max-w-7xl overflow-hidden flex flex-col md:flex-row shadow-2xl rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 min-h-[600px]">
+      {/* Integrated Header Title */}
+      <div className="absolute top-4 md:top-8 left-0 right-0 z-40 flex justify-center pointer-events-none">
+           <AnimatedHemloTitle className="text-3xl md:text-5xl pb-2" />
+      </div>
+
+      <div className="w-full relative max-w-7xl overflow-hidden flex flex-col md:flex-row shadow-2xl rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 min-h-[600px] z-10 mt-16 md:mt-0">
         
         {/* Left Box - Paid Early Access */}
         <div className="w-full md:w-1/2 bg-black relative p-8 md:p-12 flex flex-col justify-center items-center text-center overflow-hidden border-b md:border-b-0 md:border-r border-zinc-800">
@@ -36,8 +72,8 @@ export function RegistrationPage({ onBack }: RegistrationPageProps) {
                transition={{ delay: 0.2 }}
                className="relative z-10 flex flex-col items-center gap-8 max-w-md w-full"
              >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white leading-tight">
-                  Be one of the first users of Hemlo
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white leading-tight">
+                  Be one of the first users
                 </h1>
                 
                 <div className="flex flex-col items-center gap-1 p-4 rounded-xl bg-white/5 border border-white/10 w-full">
@@ -73,7 +109,7 @@ export function RegistrationPage({ onBack }: RegistrationPageProps) {
               transition={{ delay: 0.4 }}
               className="relative z-10 flex flex-col items-center gap-8 max-w-md w-full"
             >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-zinc-900 dark:text-white leading-tight">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-zinc-900 dark:text-white leading-tight">
                   Notify me when available worldwide
                 </h2>
 
